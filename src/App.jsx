@@ -11,10 +11,13 @@ import AddPost from './pages/AddPost'
 import { useEffect, useState } from 'react'
 import axiosInstance from './interceptor'
 import Post from './Components/Post'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   
   const [currentUser,setState]=useState(null);
+
+  
  
   useEffect(()=>{
     async function fetchData(){
@@ -32,8 +35,9 @@ function App() {
     <>
       <BrowserRouter>
       <Navbar/>
+      <ToastContainer />
       <Routes>
-        <Route path='/home' element={<Home/>}/>
+        <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/news' element={<News currentUser={currentUser}/>}/>
         <Route path='/sign' element={<SignUp/>}/>

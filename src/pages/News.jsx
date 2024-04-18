@@ -27,6 +27,8 @@ export default function News({currentUser}) {
   }
   
   return (
+
+  
     <div >
       <div className="flex justify-end">
       <button onClick={handleAddPost} className="bg-yellow-700 text-white px-3 py-2 rounded mx-5 mb-3 ">Add Post</button>

@@ -36,8 +36,11 @@ export default function SignUp() {
   });
 
   return (
-    <div className="m-auto flex justify-center items-center">
-      <form onSubmit={formik.handleSubmit} className="bg-white p-8 rounded-lg shadow-md mt-28">
+    <div className="card lg:card-side bg-base-100 shadow-xl m-auto w-8/12 mt-16">
+  <figure className="h-auto"><img src="https://img.freepik.com/free-vector/placeholder-concept-illustration_114360-8289.jpg?t=st=1713436499~exp=1713440099~hmac=a5b7f4fb96c57d56f10f4cb35c5d84b2586a66f7b9a2c9804541b659393aae34&w=540" alt="Album"/></figure>
+  <div className="card-body">
+    <h2 className="card-title mt-10">
+    <form onSubmit={formik.handleSubmit} >
         <div className="flex justify-center items-center gap-2">
           <div>
             <label htmlFor="fname" className="block">
@@ -50,7 +53,7 @@ export default function SignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
+              className="w-full  rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
             />
             {formik.touched.firstName && formik.errors.firstName ? (
               <div className="text-red-500">{formik.errors.firstName}</div>
@@ -67,7 +70,7 @@ export default function SignUp() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
-              className="w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
+              className="w-full  rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
             />
             {formik.touched.lastName && formik.errors.lastName ? (
               <div className="text-red-500">{formik.errors.lastName}</div>
@@ -85,7 +88,7 @@ export default function SignUp() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
-            className="w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
+            className="w-full  rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
           />
           {formik.touched.email && formik.errors.email ? (
             <div className="text-red-500">{formik.errors.email}</div>
@@ -102,7 +105,7 @@ export default function SignUp() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
-            className="w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
+            className="w-full rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
           />
           {formik.touched.password && formik.errors.password ? (
             <div className="text-red-500">{formik.errors.password}</div>
@@ -116,6 +119,13 @@ export default function SignUp() {
           {formik.isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </form>
-    </div>
+      
+
+    </h2>
+   
+   
+  </div>
+</div>
+   
   );
 }

@@ -1,20 +1,26 @@
 import { useFormik } from 'formik'
 import React from 'react'
-
 import axiosInstance from '../interceptor';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import * as Yub from 'yup';
 
 export default function AddPost() {
 
     const navigate=useNavigate();
     const formik=useFormik({
+
         initialValues:{
             title:'',
             description:'',
             image:''
         },
-        // validationSchema:Yub.object({
-        //     title:Yub.string().required("title id required")
+
+        // validationSchema:Yup.object({
+        //     title:Yub.string().required("title is required"),
+        //     description:Yub.string().required("Content is required"),
+        //     image:Yub.string()
         // }),
         
         onSubmit: async (values) => {
@@ -26,18 +32,20 @@ export default function AddPost() {
                );
                console.log(response);
                if (response.status ==201) {
-                 navigate("/home");
+                toast.success("Post Added Successfully");
+                setTimeout(()=>navigate("/news"),2000); 
                }
                console.log(response);
              } catch (error) {
                console.log(error);
+               toast.error("some thing wrong");
              }
            }
         })
   return (
-    <div className="flex justify-center items-center">
-      <form onSubmit={formik.handleSubmit} className="bg-white p-8 rounded-lg shadow-md mt-28">
-       
+    <div className="card lg:card-side bg-transparent shadow-2xl m-auto w-4/12 ">
+      <form onSubmit={formik.handleSubmit} className=" p-8 rounded-lg shadow-sm m-auto">
+      <ToastContainer /> 
         <div>
           <label htmlFor="title" className="block">
            Title
@@ -49,9 +57,12 @@ export default function AddPost() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.title}
-            className="w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
+            className="w-full rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
           />
-          
+           {/* {formik.touched.title && formik.errors.title ? (
+                <div className="text-red-500">{formik.errors.title}</div>
+              ) : null}
+           */}
         </div>
         <div className="mb-6">
           <label htmlFor="description" className="block">
@@ -64,8 +75,11 @@ export default function AddPost() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.description}
-            className="w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
+            className="w-full  rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
           />
+           {/* {formik.touched.description && formik.errors.description ? (
+                <div className="text-red-500">{formik.errors.description}</div>
+              ) : null} */}
          
         </div>
         <div className="mb-6">
@@ -79,7 +93,7 @@ export default function AddPost() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.image}
-            className="w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
+            className="w-full  rounded-md px-4 py-2 focus:outline-none focus:border-blue-400"
           />
          
         </div>

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function SignUp() {
+export default function SignUp({setIsUser,setCurrentUser}) {
   const navigate = useNavigate();
   const notify = () => toast("Wow so easy!");
 
@@ -30,8 +30,12 @@ export default function SignUp() {
           toast.error("Invalid email or password");
         } else {
           localStorage.setItem("jwtToken", res.data.jwttoken);
+          setIsUser(true)
+          //console.log(res.data.user)
+          setCurrentUser(res.data.user)
+          console.log(res.data.user)
           toast.success("Login successful");
-          setTimeout(()=>navigate("/"),2000); // Redirect to home page after successful login
+          setTimeout(()=>navigate("/"),3000); // Redirect to home page after successful login
         }
       } catch (error) {
         console.error("Error submitting form:", error);

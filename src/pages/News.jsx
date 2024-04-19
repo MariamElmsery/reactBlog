@@ -4,38 +4,25 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../interceptor";
 import Post from "../Components/Post";
 
-export default function News({currentUser}) {
-  const [posts, setPosts] = useState([]);
+export default function News({currentUser,isUser,posts, setPosts,deletePost}) {
   const navigate = useNavigate();
 
   const handleAddPost=()=>{
     navigate('/addPost')
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      const { data } = await axios.get("http://localhost:3070/posts");
-     
-     
-      setPosts(data);
-    }
-    fetchData();
-  }, []);
 
-  const handelUpdate=(id)=>{
-   console.log(id);
-  }
-  
   return (
 
   
     <div >
       <div className="flex justify-end">
-      <button onClick={handleAddPost} className="bg-yellow-700 text-white px-3 py-2 rounded mx-5 mb-3 ">Add Post</button>
+      {isUser&&<button onClick={handleAddPost} className="bg-yellow-700 text-white px-3 py-2 rounded mx-5 mb-3 ">Add Post</button>}
       </div>
       {posts.map((post) => (
-       <Post post={post}
+       <Post key={post._id} post={post}
        currentUser={currentUser}
+       deletePost={deletePost}
        
        />
       ))}

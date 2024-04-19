@@ -1,20 +1,25 @@
 import { useFormik } from 'formik'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axiosInstance from '../interceptor';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yub from 'yup';
 
-export default function AddPost({addPost}) {
+export default function EditPost({getPost,editPost}) {
+    const {id}= useParams()
+
+    const post= getPost(id)
+    console.log(post)
+
 
     const navigate=useNavigate();
+    
     const formik=useFormik({
-
         initialValues:{
-            title:'',
-            description:'',
-            image:''
+            title:post?.title?post.title: "",
+            description: post?.description?post.description: "",
+            image:post?.image?post.image: "",
         },
 
         // validationSchema:Yup.object({
@@ -26,16 +31,17 @@ export default function AddPost({addPost}) {
         onSubmit: async (values) => {
           
              try {
-               const response = await axiosInstance.post(
-                 "http://localhost:3070/posts",
+               const response = await axiosInstance.patch(
+                 "http://localhost:3070/posts/"+id,
                  values
                );
-               if (response.status ==201) {
-                toast.success("Post Added Successfully");
+               //console.log(response);
+                toast.success("Post Edited Successfully");
                 setTimeout(()=>navigate("/news"),2000); 
-               }
-               console.log(response.data)
-              addPost(response.data);
+                //console.log({post,...values})
+                editPost({...post,...values})
+               
+              // console.log(response);
              } catch (error) {
                console.log(error);
                toast.error("some thing wrong");

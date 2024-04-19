@@ -1,7 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({isUser,setIsUser,setCurrentUser}) {
+  const path=useLocation().pathname
+  console.log(path)
+  const handleLogout= ()=>{
+    localStorage.removeItem("jwtToken")
+    setIsUser(false)
+    setCurrentUser(null)
+  }
   return (
     <>
       <div className="navbar bg-transparent text-white   mb-4 ">
@@ -35,7 +42,8 @@ export default function Navbar() {
         
         <div className="navbar-end ">
         
-        <Link className='btn text-white border-none bg-yellow-700' to='/sign' >Sign up</Link>
+        {!isUser&&<Link className='btn text-white border-none bg-yellow-700' to={path==="/Sign"?"Login":"Sign"} >{path==="/Sign"?"Log in":"Sign up"}</Link>}
+        {isUser&&<button onClick={handleLogout} className='btn text-white border-none bg-yellow-700' to='/sign' >Log out</button>}
 
         </div>
       </div>

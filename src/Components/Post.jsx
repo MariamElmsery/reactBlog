@@ -3,14 +3,13 @@ import PenSVG from "../SVG/PenSVG";
 import TrashSVG from "../SVG/TrashSVG";
 import { useEffect, useState } from "react";
 import axiosInstance from "../interceptor";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function Post({ post, currentUser }) {
-  const res = useParams();
-  console.log(res);
-
-  console.log(currentUser.posts);
-  const posts = currentUser?.posts?.map((post) => post._id);
+export default function Post({ post, currentUser,deletePost }) {
+  //const res = useParams();
+  const navigate =useNavigate()
+ 
+  const posts = currentUser?.posts?.map((post) => post._id) || []
   console.log(posts);
 
   const handelEdit = (id) => {
@@ -19,36 +18,41 @@ export default function Post({ post, currentUser }) {
 
   const handelDelete = async (id) => {
     const res = await axiosInstance.delete(`http://localhost:3070/posts/${id}`);
+    deletePost(id)
     console.log(res);
   };
 
   return (
     <div className=" flex  m-auto mx-20" >
-      {posts.includes(post._id) && (
-        <div
-          className=" pt-4 px-2   text-blue-900"
-          onClick={() => handelEdit(post._id)}
-        >
-          <PenSVG />{" "}
-        </div>
-      )}
-      {posts.includes(post._id) && (
-        <div
-          className="pt-4 px-2 text-red-900"
-          onClick={() => handelDelete(post._id)}
-        >
-          {" "}
-          <TrashSVG />
-        </div>
-      )}
 
-<div className="card w-7/12 bg-base-100 shadow-xl m-auto image-full mb-3">
-  <figure><img src={post.image} alt="Shoes" /></figure>
+
+<div className="w-3/4 xl:w-6/12 bg-base-100 shadow-xl m-auto image-full flex-col mb-3">
+  <div className="w-full overflow-hidden max-h-96">
+  <figure><img src={post.image} alt="Shoes" className=" w-full"/></figure>
+
+
+  </div>
   <div className="card-body">
     <h2 className="card-title text-black font-bold pb-3">{post.title}</h2>
     <p className="text-black">{post.description}</p>
     <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+    {posts.includes(post._id) && (
+        <div
+          className=" pt-4 px-2   text-blue-900 "
+          onClick={() =>navigate("/editPost/"+post._id)}
+        >
+          <PenSVG/>{" "}
+        </div>
+      )}
+      {posts.includes(post._id) && (
+        <div
+          className="pt-4 px-2 text-red-900 "
+          onClick={() => handelDelete(post._id)}
+        >
+          {" "}
+          <TrashSVG  />
+        </div>
+      )}
     </div>
   </div>
 </div>

@@ -51,7 +51,7 @@ export default function EditPost({getPost,editPost}) {
   return (
     <div className="card lg:card-side bg-transparent shadow-2xl m-auto w-4/12 ">
       <form onSubmit={formik.handleSubmit} className=" p-8 rounded-lg shadow-sm m-auto">
-      <ToastContainer /> 
+      {/* <ToastContainer />  */}
         <div>
           <label htmlFor="title" className="block">
            Title

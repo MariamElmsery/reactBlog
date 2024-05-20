@@ -13,18 +13,25 @@ import Post from "./Components/Post";
 import { ToastContainer } from "react-toastify";
 import EditPost from "./pages/EditPost";
 
+
 function App() {
   let [currentUser, setCurrentUser] = useState(null);
   const [isUser, setIsUser] = useState(false);
   const [posts, setPosts] = useState([]);
 
+  const [isLoading,setloading]=useState(false);
+
   
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await axiosInstance.get("http://localhost:3070/posts");    
-     
+      setloading(true)
+      
+      const { data } = await axiosInstance.get("http://localhost:3070/posts");
+      // setloading(true)
+      setloading(false);
       setPosts(data);
+
     }
     fetchData();
 
@@ -32,7 +39,7 @@ function App() {
       if (localStorage.getItem("jwtToken")) {
         const { data } = await axiosInstance.get("http://localhost:3070/users");
         setCurrentUser(data);
-        setIsUser(true)
+        setIsUser(true);
       }
     }
     fetchCurrentUser();
@@ -51,8 +58,8 @@ function App() {
 
   const addPost = (post) => {
     // clone & update
-    let newPosts = [ post,...posts];
-    currentUser.posts=[post, ...currentUser.posts]
+    let newPosts = [post, ...posts];
+    currentUser.posts = [post, ...currentUser.posts];
     // state
     //@ts-ignore
     setPosts(newPosts);
@@ -70,23 +77,44 @@ function App() {
 
   const deletePost = (id) => {
     //@ts-ignore
-    let newPosts = posts.filter((post ) => post._id !== id);
-    currentUser.posts=currentUser.posts.filter((post ) => post._id !== id);
+    let newPosts = posts.filter((post) => post._id !== id);
+    currentUser.posts = currentUser.posts.filter((post) => post._id !== id);
     setPosts(newPosts);
   };
-  
+
   return (
     <>
       <BrowserRouter>
-        <Navbar isUser={isUser} setIsUser={setIsUser} setCurrentUser={setCurrentUser}/>
+        <Navbar
+          isUser={isUser}
+          setIsUser={setIsUser}
+          setCurrentUser={setCurrentUser}
+        />
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/news" element={<News posts={posts} setPosts={setPosts} isUser={isUser} currentUser={currentUser}  deletePost={deletePost}/>} />
+          <Route
+            path="/news"
+            element={
+              <News
+                posts={posts}
+                isLoading={isLoading}
+                setPosts={setPosts}
+                isUser={isUser}
+                currentUser={currentUser}
+                deletePost={deletePost}
+              />
+            }
+          />
           <Route path="/sign" element={<SignUp />} />
-          <Route path="/login" element={<Login setIsUser={setIsUser} setCurrentUser={setCurrentUser}/>} />
-          <Route path="/addPost" element={<AddPost addPost={addPost}/>} />
+          <Route
+            path="/login"
+            element={
+              <Login setIsUser={setIsUser} setCurrentUser={setCurrentUser} />
+            }
+          />
+          <Route path="/addPost" element={<AddPost addPost={addPost} />} />
           <Route
             path="/editPost/:id"
             element={<EditPost getPost={getPost} editPost={editPost} />}

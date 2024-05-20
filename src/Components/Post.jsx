@@ -6,15 +6,15 @@ import axiosInstance from "../interceptor";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Post({ post, currentUser,deletePost }) {
-  //const res = useParams();
+ 
   const navigate =useNavigate()
  
   const posts = currentUser?.posts?.map((post) => post._id) || []
   console.log(posts);
 
-  const handelEdit = (id) => {
-    console.log(id);
-  };
+  // const handelEdit = (id) => {
+  //   console.log(id);
+  // };
 
   const handelDelete = async (id) => {
     const res = await axiosInstance.delete(`http://localhost:3070/posts/${id}`);
@@ -32,9 +32,9 @@ export default function Post({ post, currentUser,deletePost }) {
 
 
   </div>
-  <div className="card-body">
-    <h2 className="card-title text-black font-bold pb-3">{post.title}</h2>
-    <p className="text-black">{post.description}</p>
+  <div className="card-body ">
+    <h2 className="card-title text-white font-bold pb-3">{post.title}</h2>
+    <p className="text-white">{post.description}</p>
     <div className="card-actions justify-end">
     {posts.includes(post._id) && (
         <div
@@ -57,13 +57,7 @@ export default function Post({ post, currentUser,deletePost }) {
   </div>
 </div>
 
-      {/* <div key={post._id} className="rounded p-2 w-96 m-auto ">
-      <img className="rounded " src={post.image} alt="img" />
-      <div className="p-2">
-        <h2 className="font-bold">{post.title}</h2>
-        <div className=''>{post.description}</div>
-      </div>
-    </div> */}
+    
     </div>
   );
 }

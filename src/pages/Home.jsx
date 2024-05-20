@@ -40,7 +40,7 @@ export default function Home() {
             />
           </figure>
           <div className="card-body items-center text-center">
-            <h2 className="card-title  text-white pb-2 text-white">Wall St set for higher open as upbeat earnings obscure Mideast
+            <h2 className="card-title pb-2 text-white">Wall St set for higher open as upbeat earnings obscure Mideast
               jitters</h2>
             <p> By Shashwat Chauhan and Shristi Achar A (Reuters) -Wall Street's
               main stock indexes were on track for a higher open on Tuesday,

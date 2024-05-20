@@ -46,7 +46,7 @@ export default function SignUp({setIsUser,setCurrentUser}) {
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl m-auto w-7/12 mt-16 ">
 
-      <ToastContainer /> {/* Add ToastContainer component */}
+       {/* Add ToastContainer component */}
       <figure className="h-auto">
         <img src="https://img.freepik.com/free-vector/computer-login-illustration-concept_114360-23362.jpg?t=st=1713438084~exp=1713441684~hmac=50915e0a15e2708bbf580a1ddd4616c1ec3f51abfcd3350c3bb697013d8c5cfa&w=340" alt="Album" />
       </figure>

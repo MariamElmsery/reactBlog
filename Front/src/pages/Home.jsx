@@ -35,7 +35,7 @@ export default function Home() {
           <figure className="px-10 pt-10">
             <img
               src="https://i-invdn-com.investing.com/news/Brazil-Stock-Market_3_800x533_L_1414427437.jpg"
-              alt="Shoes"
+              alt="img"
               className="rounded-xl aspect-square"
             />
           </figure>
@@ -46,16 +46,14 @@ export default function Home() {
               main stock indexes were on track for a higher open on Tuesday,
               with health insurers leading the charge following upbeat results
               from … [+2965 chars]</p>
-            {/* <div className="card-actions">
-              <button className="btn btn-primary">Buy Now</button>
-            </div> */}
+           
           </div>
         </div>
         <div className="card w-72 bg-base-100 shadow-xl">
           <figure className="px-10 pt-10">
             <img
               src="https://www.tagesspiegel.de/images/brandenburgs-cdu-fraktions-und-landeschef-jan-redmann1/alternates/BASE_16_9_W1400/brandenburgs-cdu-fraktions--und-landeschef-jan-redmann.jpeg"
-              alt="Shoes"
+              alt="img"
               className="rounded-xl aspect-square"
             />
           </figure>
@@ -66,16 +64,14 @@ export default function Home() {
               CDU-Fraktionschef im brandenburgischen Landtag, Jan Redmann, auch
               Gefahren für andere Kommunen im Berliner Speckgürtel. Die
               Energiewende führt </p>
-            {/* <div className="card-actions">
-              <button className="btn btn-primary">Buy Now</button>
-            </div> */}
+            
           </div>
         </div>
         <div className="card w-72 bg-base-100 shadow-xl">
           <figure className="px-10 pt-10">
             <img
               src="https://c.biztoc.com/p/52a89de389ab4625/s.webp"
-              alt="Shoes"
+              alt="img"
               className="rounded-xl aspect-square "
             />
           </figure>
@@ -86,9 +82,7 @@ export default function Home() {
               CDU-Fraktionschef im brandenburgischen Landtag, Jan Redmann, auch
               Gefahren für andere Kommunen im Berliner Speckgürtel. Die
               Energiewende führt dazu</p>
-            {/* <div className="card-actions">
-              <button className="btn btn-primary">Buy Now</button>
-            </div> */}
+           
           </div>
         </div>
       </div>
